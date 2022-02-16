@@ -1,0 +1,23 @@
+{
+  "name": "shippingsoftware",
+  "version": "1.0.0",
+  "description": "Shipping Software",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristopherClemm/ShippingSoftware.git"
+  },
+  "author": "Chris C and Brighten B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristopherClemm/ShippingSoftware/issues"
+  },
+  "homepage": "https://github.com/ChristopherClemm/ShippingSoftware#readme",
+  "devDependencies": {
+    "electron": "^17.0.1"
+  }
+}
