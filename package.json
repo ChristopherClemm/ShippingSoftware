@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/ChristopherClemm/ShippingSoftware#readme",
   "devDependencies": {
-    "electron": "^17.0.1"
+    "electron": "^17.0.1",
+    "electron-rebuild": "^3.2.7"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0",
+    "nan": "^2.15.0"
   }
 }

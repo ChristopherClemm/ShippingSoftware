@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-</head>
-<body>
-    <h1>Hello World!</h1>
-    <p>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
-    </p>
-</body>
+   <head>
+      <meta charset = "UTF-8">
+      <title>Hello World!</title>
+   </head>
+   
+   <body>
+      <div class = "container">
+         <h1>Shipping Container Software</h1>
+         <h3 id = "click-counter"></h3>
+         <button class = "btn">Click here</button>
+         <form>
+
+            <input type="text" id="logText" name="fname"><br>
+            <button id="logButton">Click here</button>
+         </form>
+
+         <h3>Ship Manifest in Electron</h3>
+         <button id="uploadManifest">Upload File</button>
+
+         <h3 id = "shipFilePath"></h3>
+         <button id="shipFilePathButton">Click here</button>
+         <script src = "./view.js" ></script>
+      </div>
+   </body>
 </html>
