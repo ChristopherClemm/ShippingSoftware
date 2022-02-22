@@ -21,6 +21,13 @@ function createWindow () {
   win.loadFile('index.html')
 }
 
+function readInput() {
+  console.log(typeof global.filepath)
+  const data = fs.readFileSync(global.filepath,
+      {encoding:'utf8', flag:'r'});
+  console.log(data);
+}
+
 app.whenReady().then(() => {
   createWindow()
 
@@ -39,32 +46,7 @@ app.on('window-all-closed', () => {
 
 ipcMain.on("saveText", (event,txtVal) => {
     fs.appendFile("logfile1.txt",txtVal, (err) =>{
-        if(!err) {console.log("File Written");
-                    console.log(global.filepath);
-                    
-                    function calc() {
-  
-                        // Two variables.
-                        let i, x = 3.141526, y = 2.718;
-                        for (i = 0; i < 100000000; i++) {
-                            x += 1;
-                      
-                        }
-                        let total = x;
-                        return total;
-                    }
-                      
-                    console.time('c++');
-                    hello2.hello();
-                    console.timeEnd('c++');
-                      
-                    console.time('js');
-                    calc();
-                      
-                    console.timeEnd('js');
-                
-                    
-                    
+        if(!err) {console.log("File Written");                    
                 }
         else {
             console.log(txtVal);
@@ -72,6 +54,31 @@ ipcMain.on("saveText", (event,txtVal) => {
         }
     })
 })
+
+
+ipcMain.on("testc++", (event) => {
+  
+              function calc() {
+
+                  // Two variables.
+                  let i, x = 3.141526, y = 2.718;
+                  for (i = 0; i < 100000000; i++) {
+                      x += 1;
+                
+                  }
+                  let total = x;
+                  return total;
+              }
+                
+              console.time('c++');
+              hello2.hello();
+              console.timeEnd('c++');
+                
+              console.time('js');
+              calc();
+                
+              console.timeEnd('js');                       
+  })
 
 ipcMain.on("uploadManifest", (event) => {
     console.log("hello im trig");
@@ -108,11 +115,13 @@ ipcMain.on("uploadManifest", (event) => {
                 // to user-selected file.
                 global.filepath = file.filePaths[0].toString();
                 console.log(global.filepath);
+                readInput();
                 }  
             }).catch(err => {
                 console.log(err)
             });
         }
-    
+
 
 })
+

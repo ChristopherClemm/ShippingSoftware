@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C81957DB-8BFA-67DF-D9C9-19BE50DC9016}</ProjectGuid>
+    <ProjectGuid>{6CCFCACC-6040-DDC2-74C9-ECE81B077056}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>hello</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
@@ -127,7 +127,7 @@
     <ClCompile Include="..\src\hello.cc">
       <ObjectFileName>$(IntDir)\src\hello.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="C:\Users\Chris Clemm\Desktop\API_Projects\ShippingSoftware\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+    <ClCompile Include="C:\Users\Chris Clemm\Desktop\CS179\ShippingSoftware\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>

@@ -30,5 +30,11 @@ window.addEventListener('DOMContentLoaded', () => {
             ipcRenderer.send("uploadManifest");
         });
 
+    let testcpp = document.getElementById("testcpphh");
+    testcpp.addEventListener('click', () => {
+            console.log("clicleddddd");
+            ipcRenderer.send("testc++");
+        });
+
 
   })
