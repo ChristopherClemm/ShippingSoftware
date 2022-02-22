@@ -4,6 +4,11 @@ using namespace v8;
 
 void myFunc(){
   std::cout << "sup";
+  long long count = 0;
+  for (long long i = 0; i < 10000000000; i++) {
+    count = i;
+  }
+  std::cout << count << "\n";
 }
 
 NAN_METHOD(hello) {
@@ -13,6 +18,9 @@ NAN_METHOD(hello) {
     count = i;
   }
   myFunc();
+  myFunc();
+  myFunc();
+  myFunc(); 
   std::cout << "hello2\n";
 }
 

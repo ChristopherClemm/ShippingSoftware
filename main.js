@@ -73,7 +73,7 @@ ipcMain.on("testc++", (event) => {
               console.time('c++');
               hello2.hello();
               console.timeEnd('c++');
-                
+              console.log("after c++")
               console.time('js');
               calc();
                 
