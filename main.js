@@ -26,6 +26,14 @@ function readInput() {
   const data = fs.readFileSync(global.filepath,
       {encoding:'utf8', flag:'r'});
   console.log(data);
+  fs.writeFile("currShip.txt",data, (err) =>{
+    if(!err) {console.log("File Written");                    
+            }
+    else {
+        console.log(data);
+        console.log("err");
+    }
+})
 }
 
 app.whenReady().then(() => {
