@@ -1,3 +1,12 @@
+
+const { ipcRenderer} = require("electron");
+
+const electron = require('electron');
+const path = require('path');
+
+
+
+
 const btn = document.querySelector('.btn');
 btn.addEventListener('click', function(event){
     document.getElementById("click-counter").innerHTML = "Hello JavaScript!";
@@ -13,6 +22,7 @@ listButton.addEventListener('click', function(event){
         entry.appendChild(document.createTextNode("hello"));
         list.appendChild(entry);
       }
+      //ipcRenderer.send("testc++");
     console.log('Button Clicked');
 });
 

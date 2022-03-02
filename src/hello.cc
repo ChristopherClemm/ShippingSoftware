@@ -46,6 +46,7 @@ class Node{
         int balance = 100;
         bool emptyCrane;
         std::string instructions;
+        std::string rawInsructions;
 
         //std::vector<int> vec;
         //Node(std::vector<int>& ship);
@@ -107,11 +108,11 @@ void printInstructions(Node * );
 
 int main()
 {
-    std::cout << "started\n";
+    //std::cout << "started\n";
     std::vector<std::vector<Container>>ship = readinFile();
     //containersToBeLoaded();
     //containersToBeUnloaded();
-    std::cout << "done\n";
+    //std::cout << "done\n";
     printShip(ship);
     balance(ship);
     int i = 0;
@@ -370,6 +371,7 @@ void balance(std::vector<std::vector<Container>>ship)
     currNode.depth = 0;
     currNode.emptyCrane = true;
     currNode.instructions = "";
+    currNode.rawInsructions = "";
     //Node* prev = *t;
     //printShip(currNode->currShip);
     //  
@@ -443,6 +445,13 @@ void balance(std::vector<std::vector<Container>>ship)
     printShip(currNode.currShip);
     std::cout<< currNode.instructions; 
     std::cout << "cost?  " << currNode.depth << "\n";
+    std::ofstream myfile;
+    myfile.open ("instructions.txt");
+    myfile << currNode.rawInsructions;
+    myfile.close();
+    myfile.open("instructionsText.txt");
+    myfile << currNode.instructions;
+    myfile.close();
     //int h = 0;
     //std::cout << "h = " << h << "\n";
     /*Node * temp = new Node();
@@ -967,8 +976,29 @@ void updateQueueBalance(std::priority_queue<Node, std::vector<Node>, myComparato
             //COST TO GET TO THE CONTAINER
             int costToGetToContainer = findPath(craneX, craneY, currContianerPair.first, currContianerPair.second, ship);
             Node newNode;
-            newNode.instructions = currNode.instructions + "Move from Crane (" + std::to_string(craneX) + ", " +  std::to_string(craneY)  + ") to (" +  std::to_string(currContianerPair.first) + " , " 
-                +  std::to_string(currContianerPair.second)+ ") \n";
+            std::string craneXString = std::to_string(craneX+1);
+            std::string craneYString = std::to_string(craneY+1);
+            if(craneX+1 < 10)
+            {
+                craneXString = "0"  + craneXString;
+            } 
+            if(craneY+1 < 10)
+            {
+                craneYString = "0" + craneYString;
+            } 
+
+            std::string currXString = std::to_string(currContianerPair.first+1);
+            std::string currYString = std::to_string(currContianerPair.second+1);
+            if(currContianerPair.first+1 < 10)
+            {
+                currXString = "0"  + currXString;
+            } 
+            if(currContianerPair.second+1 < 10)
+            {
+                currYString = "0" + currYString;
+            } 
+                
+            
             newNode.currShip = ship;
             int balance = isBalanced(newNode.currShip,left,right);
             newNode.emptyCrane = false;
@@ -976,6 +1006,10 @@ void updateQueueBalance(std::priority_queue<Node, std::vector<Node>, myComparato
             newNode.craneY = currContianerPair.second;
             newNode.depth = currNode.depth + costToGetToContainer;
             newNode.cost =currNode.depth + 1+ balance + costToGetToContainer;
+            newNode.instructions = currNode.instructions + "Move Crane from (" + std::to_string(craneX) + ", " +  std::to_string(craneY)  + ") to (" +  std::to_string(currContianerPair.first) + " , " 
+                +  std::to_string(currContianerPair.second)+ ")\n";
+            newNode.rawInsructions = currNode.rawInsructions + "[" + craneXString + "," + craneYString  + "] [" +  currXString + "," 
+                +  currYString+ "] \n";
             pqBalance.push(newNode);
             nodesAdded++;
         }
@@ -996,7 +1030,32 @@ void updateQueueBalance(std::priority_queue<Node, std::vector<Node>, myComparato
                 Node newNode;
                 //std::cout << "FINDING WHERE TO PUT\n";
                 newNode.instructions = currNode.instructions + "Move ("+  std::to_string(craneX) + " , "+  std::to_string(craneY)+ ") to ("
-                 +  std::to_string(currEmptyPair.first) + " , " +  std::to_string(currEmptyPair.second) + ") \n weight = " + std::to_string(ship[craneX][craneY].weight) + "cost = "  + std::to_string(cost) + "\n\n";
+                 +  std::to_string(currEmptyPair.first) + " , " +  std::to_string(currEmptyPair.second) + ")\n";
+
+                std::string craneXString = std::to_string(craneX+1);
+                std::string craneYString = std::to_string(craneY+1);
+                if(craneX+1 < 10)
+                {
+                    craneXString = "0"  + craneXString;
+                } 
+                if(craneY+1 < 10)
+                {
+                    craneYString = "0" + craneYString;
+                } 
+
+                std::string currXString = std::to_string(currEmptyPair.first+1);
+                std::string currYString = std::to_string(currEmptyPair.second+1);
+                if(currEmptyPair.first+1 < 10)
+                {
+                    currXString = "0"  + currXString;
+                } 
+                if(currEmptyPair.second+1 < 10)
+                {
+                    currYString = "0" + currYString;
+                } 
+                
+                
+                newNode.rawInsructions = currNode.rawInsructions + "[" + craneXString + "," + craneYString +"] ["  +  currXString + "," + currYString + "]\n";
                 //newNode->prev = currNode;
                 //leftNode->currX = x;
                 //leftNode->currY = y;  

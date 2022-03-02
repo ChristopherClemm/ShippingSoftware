@@ -1,46 +1,7 @@
-hello there
-please work
-hiiiii
-hello world
-hi
-hello
-
-h
-hiii
-hh
-h
-hel
-hhhhh
-no way
-hiiii
-goat
-hi
-jjjjjjj
-hi
-hi
-hi
-kkkkk
-j
-f
-hhhhhhhh
-
-
-
-jjj
-
-
-
-this is log ho
-
-
-hello log
-hi
-
-
-hwoaw
-hhhh
-hjsadhasd
-hello
-hjhjhjhjh
-
-hjhjhjhjh
+2/2/2022 20:43:53 : Hello
+2/2/2022 20:44:3 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase4.txt
+2/2/2022 20:44:26 : Move from Crane (8, 0) to (7 , 4)2/2/2022 20:44:27 : Move (7 , 4) to (1 , 3)2/2/2022 20:44:27 : Move from Crane (1, 3) to (6 , 4)2/2/2022 20:44:28 : Move (6 , 4) to (1 , 6)2/2/2022 20:44:29 : Move from Crane (1, 6) to (5 , 4)2/2/2022 20:44:29 : Move (5 , 4) to (2 , 3)2/2/2022 20:44:30 : Move from Crane (2, 3) to (4 , 4)2/2/2022 20:44:30 : Move (4 , 4) to (2 , 6)2/2/2022 20:48:19 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase1.txt
+2/2/2022 20:48:24 : Move from Crane (8, 0) to (0 , 2)2/2/2022 20:48:28 : Move (0 , 2) to (0 , 6)2/2/2022 20:48:55 : There is something wrong with the contianers
+2/2/2022 20:51:34 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase3.txt
+2/2/2022 20:51:40 : Move from Crane (8, 0) to (1 , 0)2/2/2022 20:51:49 : Move (1 , 0) to (2 , 1)2/2/2022 20:51:50 : Move from Crane (2, 1) to (0 , 0)2/2/2022 20:52:41 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase1.txt
+2/2/2022 20:52:53 : Move from Crane (8, 0) to (0 , 2)2/2/2022 20:52:57 : Move (0 , 2) to (0 , 6)2/2/2022 20:54:52 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase5.txt
