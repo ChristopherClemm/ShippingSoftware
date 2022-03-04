@@ -3,6 +3,16 @@ const { ipcRenderer} = require("electron");
 const electron = require('electron');
 const path = require('path');
 var pressed = 0;
+
+
+
+let logButton = document.getElementById("logButton");
+logButton.addEventListener("click", () => {
+    let txtBox = document.getElementById("logText");
+    let txtval = txtBox.value + "\n";
+    ipcRenderer.send("saveText", txtval);
+})
+
 const listButton = document.getElementById('createList');
 var list = document.getElementById('demo');
 listButton.addEventListener('click', function(event){

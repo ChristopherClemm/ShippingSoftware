@@ -5,10 +5,7 @@ const path = require('path');
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-      const element = document.getElementById(selector)
-      if (element) element.innerText = text
-    }
+   
     let logButton = document.getElementById("logButton");
     logButton.addEventListener("click", () => {
         let txtBox = document.getElementById("logText");
@@ -28,13 +25,13 @@ window.addEventListener('DOMContentLoaded', () => {
     let uploadManifest = document.getElementById("uploadManifest");
     uploadManifest.addEventListener('click', () => {
             ipcRenderer.send("uploadManifest");
-        });
+        })
 
     let testcpp = document.getElementById("testcpphh");
     testcpp.addEventListener('click', () => {
             console.log("clicleddddd");
             ipcRenderer.send("testc++");
-        });
+        })
 
 
-  })
+  });

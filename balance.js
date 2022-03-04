@@ -104,7 +104,6 @@ showGridButton.addEventListener('click', function(event){
     console.log("You clicked on row:",row);
     console.log("You clicked on col:",col);
     console.log("You clicked on item #:",i);
-
     el.className='clicked';
     if (lastClicked) lastClicked.className='';
     lastClicked = el;
@@ -137,11 +136,9 @@ showGridButton.addEventListener('click', function(event){
                         //console.log(gridUpdates[((top*12) - (12 - (diff%12)))].substring(5,10));
                         cell.className = 'CONTAINER';
                     }
-
                     cell.innerHTML = text.substring(0,5);
                 }
                 
-
                 i++;
                 
                 cell.addEventListener('click',(function(el,r,c,i){
@@ -182,4 +179,15 @@ balanceNextButton.addEventListener('click', function(event){
     ipcRenderer.sendSync("updateManifest", instruction);
     console.log(instruction);
     test = test +1;
+});
+
+const logButtonB = document.getElementById('BalancelogButton');
+logButtonB.addEventListener("click", function(event){
+    let txtBox = document.getElementById("BalancelogText");
+
+    let txtval = txtBox.value + "\n";
+    ipcRenderer.send("saveText", txtval);
+    console.log("trying to redraw");
+    //redraw([-1,-1,-1,-1, " "]);
+    txtBox.value = "";
 });
