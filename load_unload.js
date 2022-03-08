@@ -4,7 +4,7 @@ const electron = require('electron');
 const path = require('path');
 var pressed = 0;
 
-
+/*
 
 let logButton = document.getElementById("logButton");
 logButton.addEventListener("click", () => {
@@ -12,11 +12,31 @@ logButton.addEventListener("click", () => {
     let txtval = txtBox.value + "\n";
     ipcRenderer.send("saveText", txtval);
 })
+*/
+function showContainers()
+{
+    let listOfContainers = ipcRenderer.sendSync("getListOfContainers")
+    console.log(listOfContainers)
+    for (let i = 0; i < listOfContainers.length; i++) {
+        var entry = document.createElement('li');
+        entry.name = "checkList"
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.value = listOfContainers[i];
+        checkbox.name = "myCheckBoxes";
+        checkbox.textContent = listOfContainers[i];
+        checkbox.innerHTML = listOfContainers;
+        entry.appendChild(document.createTextNode(listOfContainers[i].substring(18)));
+        entry.appendChild(checkbox);
+        //console.log(listOfContainers[i]);
+        list.appendChild(entry);   
+    }
+}
 
-const listButton = document.getElementById('createList');
+//const listButton = document.getElementById('createList');
 var list = document.getElementById('demo');
-listButton.addEventListener('click', function(event){
-    console.log
+/*listButton.addEventListener('click', function(event){
+    console.log("test");
 
     if(pressed == 0)
     {
@@ -46,7 +66,7 @@ listButton.addEventListener('click', function(event){
     }
     
 });
-
+*/
 
 
 const submitListButton = document.getElementById('submitList');
@@ -68,11 +88,20 @@ submitListButton.addEventListener('click', function(event){
 
     pressed = 0;
     ipcRenderer.sendSync("sendListOfContainers", checkboxesChecked);
-    window.location.replace("./load.html");
+    //window.location.replace("./load.html");
+    console.log("got to here");
+    location.href='./load.html';
+    console.log("got to here");
     
 
     //return checkboxesChecked.length > 0 ? checkboxesChecked : null;
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    showContainers();
+    //redraw([-1,-1,-1,-1, " "]);
+    //alert("Ready!");
+}, false);
 
     

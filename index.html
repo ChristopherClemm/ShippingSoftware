@@ -11,23 +11,27 @@
          <h1>Shipping Container Software</h1>
          <!-- <h3 id = "click-counter"></h3>
          <button class = "btn">Click here</button> -->
+
          <form>
             <input type="text" id="logText" name="fname"><br>
-            <button id="logButton">ENTER LOG TEXT</button>
+            <button  class = "button"  id="logButton">ENTER LOG TEXT</button>
          </form>
+         <input type="text" id="loginText" name="fname"><br>
+         <button class = "button" id="login">Log In</button>
 
-         <h3>Ship Manifest in Electron</h3>
-         <button id="uploadManifest">Upload File</button>
+         <h3>Upload Ship Manifest</h3>
+         <h3 id ="currShipName"></h3>
+         <button class = "button" id="uploadManifest">Upload Manifest</button>
 
          <h3 id = "shipFilePath"></h3>
-         <button id="shipFilePathButton">Click here</button>
-         <button id="testcpphh">TEST C++</button>
-
-         <ol id="demo"></ol>
-         <button id="createList">Make list</button>
-         <button onclick="location.href='balancePage.html'" type="button">
+         
+         <!--<ol id="demo"></ol>
+         <button id="createList">Make list</button> --> 
+         
+        
+         <button class = "balanceButton"  onclick="location.href='balancePage.html'" type="button">
             BALANCE</button>
-         <button onclick="location.href='load.html'" type="button">
+         <button  class = "loadButton" onclick="location.href='load_unload.html'" type="button">
             LOAD/UNLOAD</button>
          
          

@@ -13,25 +13,32 @@ window.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.send("saveText", txtval);
     })
     
-    let manifestFilePathButton = document.getElementById("shipFilePathButton");
-    manifestFilePathButton.addEventListener("click", () => {
-
-        document.getElementById("shipFilePath").innerHTML = "Hello JavaScript!"
-        let txtBox = document.getElementById("logText");
-        let txtval = txtBox.value + "\n";
-        ipcRenderer.send("saveText", txtval);
-    })
+   
 
     let uploadManifest = document.getElementById("uploadManifest");
     uploadManifest.addEventListener('click', () => {
             ipcRenderer.send("uploadManifest");
         })
 
-    let testcpp = document.getElementById("testcpphh");
-    testcpp.addEventListener('click', () => {
-            console.log("clicleddddd");
-            ipcRenderer.send("testc++");
-        })
+        
+
+    const loginButton = document.getElementById('login');
+    loginButton.addEventListener("click", function(event){
+        let txtBox = document.getElementById("loginText");
+    
+        let txtval = txtBox.value + " logged into the system"+ "\n";
+        ipcRenderer.send("saveText", txtval);
+        //console.log("trying to redraw");
+        //redraw([-1,-1,-1,-1, " "]);
+        txtBox.value = "";
+    });
+    ipcRenderer.on('shipUpload', function () {
+        let currShipName = ipcRenderer.sendSync("getShipName");
+        document.getElementById('currShipName').innerHTML = currShipName + " is uploaded into the system";
+        //document.getElementById('currShipName').innerHTML = "Press Next To Begin";
+    
+    });
+    
 
 
   });

@@ -41,12 +41,44 @@ body{
     margin: 0px;
     padding: 0px;
     /* background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(images/banner.png); */
-    background-image: linear-gradient(rgba(207, 207, 207, 0.7), rgba(207, 207, 207, 0.7)), url(/banner2.png);
+    /*background-image: linear-gradient(rgba(207, 207, 207, 0.7), rgba(207, 207, 207, 0.7)), url(banner2.png);
     background-position:center;
-    background-size: auto;
+    background-size: auto;*/
     position: relative;
     text-align : center;
     -webkit-text-stroke: .1px rgb(255, 255, 255);
     font-weight: rgb(white);
 }
+
+
+.balanceButton {
+    background-color: #af4c4c; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  .loadButton {
+    background-color: #4c53af; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  .button {
+    background-color: #5d5d5d; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 11px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
 /* nav{} */

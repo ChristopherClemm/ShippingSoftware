@@ -6,8 +6,8 @@
     "defines": [],
     "include_dirs": [],
     "libraries": [],
-    "msbuild_toolset": "v142",
-    "msvs_windows_target_platform_version": "10.0.19041.0"
+    "msbuild_toolset": "v141",
+    "msvs_windows_target_platform_version": "10.0.17134.0"
   },
   "variables": {
     "asan": 0,
@@ -345,9 +345,9 @@
     "v8_trace_maps": 0,
     "v8_use_siphash": 1,
     "want_separate_host_toolset": 1,
-    "nodedir": "C:\\Users\\brigh\\.electron-gyp\\17.0.1",
+    "nodedir": "C:\\Users\\Chris Clemm\\.electron-gyp\\17.0.1",
     "standalone_static_library": 1,
-    "msbuild_path": "D:\\Visual Studios\\MSBuild\\Current\\Bin\\MSBuild.exe",
+    "msbuild_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\MSBuild.exe",
     "runtime": "electron",
     "target": "17.0.1",
     "build_from_source": "true"

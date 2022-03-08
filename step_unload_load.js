@@ -89,11 +89,13 @@ function redraw(instruction)
 
 }
 
-const DownloadGridButton = document.getElementById('Download');
-DownloadGridButton.addEventListener('click', function(event){
-    ipcRenderer.send("download");
-});
 
+
+const showGridButton = document.getElementById('ShowGrid');
+//var list = document.getElementById('demo');
+showGridButton.addEventListener('click', function(event){
+    redraw([-1,-1,-1,-1, " "]);
+});
 
 const balanceButton = document.getElementById('CPPBalanceShip');
 //var list = document.getElementById('demo');
@@ -109,15 +111,12 @@ const balanceNextButton = document.getElementById('CPPBalanceShipNext');
 //var list = document.getElementById('demo');
 balanceNextButton.addEventListener('click', function(event){
     console.log('Balance Next Button Clicked');
-    document.getElementById('WaitForBalance').innerHTML = "";
+    
     let instruction = ipcRenderer.sendSync("getNextMove");
     redraw(instruction);
     if (instruction[4] != '')
     {
         ipcRenderer.send("saveText",instruction[4]);
-    }
-    else{
-        document.getElementById('instructText').innerHTML = "Done balancing, ready to download updated manifest";
     }
     
     ipcRenderer.sendSync("updateManifest", instruction);
@@ -138,16 +137,5 @@ logButtonB.addEventListener("click", function(event){
 
 document.addEventListener('DOMContentLoaded', function() {
     redraw([-1,-1,-1,-1, " "]);
-    let currShipName = ipcRenderer.sendSync("getShipName");
-    document.getElementById('currShipName').innerHTML = "Working on " + currShipName;
-    let res = ipcRenderer.send("balance_c++");
-    
-
     //alert("Ready!");
 }, false);
-
-
-ipcRenderer.on('completedBalance', function () {
-    document.getElementById('WaitForBalance').innerHTML = "Press Next To Begin";
-
-});

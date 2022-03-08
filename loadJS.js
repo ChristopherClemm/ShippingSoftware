@@ -5,25 +5,26 @@ const path = require('path');
 let containersToAdd = [];
 let submitContainerButton = document.getElementById("submitContainerButton");
 submitContainerButton.addEventListener("click", () => {
+    //NEED TO ADD MORE ERROR CHECKING
         let txtBox = document.getElementById("weightText");
         let txtBox1 = document.getElementById("DescriptionText");
-        //console.log(txt.length);
-        /*
-        if(txtBox.value.length < 5)
+        console.log(txtBox.value.length);
+        let weightText = txtBox.value;
+        if(weightText.length < 5)
         {
-            let tempText = txtBox.value;
-
-            while(txtBox.value.length <5)
+            let tempText = "";
+            for( let i = weightText.length; i < 5; i++)
             {
-                txtBox = "0" + txtBox;
+                tempText += "0"
             }
+            weightText = tempText + weightText
         }
-        */
-        let txtval = "{" + txtBox.value + "}, "+ txtBox1.value + "\n";
+        console.log(weightText);
+        
+        let txtval = "{" + weightText + "}, "+ txtBox1.value + "\n";
         containersToAdd.push(txtval);
         console.log(txtval);
-        ipcRenderer.sendSync("updateContainersToLoad", txtval);
-        //ipcRenderer.send("updateContainersToLoad", txtval);
+        ipcRenderer.send("updateContainersToLoad", txtval);
     })
 
 
@@ -31,6 +32,8 @@ const submitOnloadList = document.getElementById('submitOnloadList');
 //var list = document.getElementById('demo');
 submitOnloadList.addEventListener('click', function(event){
     console.log(containersToAdd);
+    location.href='./steps_unload_load.html';
+
     //ipcRenderer.sendSync("sendListOfContainers", containersToAdd);
     //window.location.replace("./load.html");
     

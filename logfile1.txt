@@ -1,28 +1,0 @@
-2/2/2022 20:43:53 : Hello
-2/2/2022 20:44:3 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase4.txt
-2/2/2022 20:44:26 : Move from Crane (8, 0) to (7 , 4)2/2/2022 20:44:27 : Move (7 , 4) to (1 , 3)2/2/2022 20:44:27 : Move from Crane (1, 3) to (6 , 4)2/2/2022 20:44:28 : Move (6 , 4) to (1 , 6)2/2/2022 20:44:29 : Move from Crane (1, 6) to (5 , 4)2/2/2022 20:44:29 : Move (5 , 4) to (2 , 3)2/2/2022 20:44:30 : Move from Crane (2, 3) to (4 , 4)2/2/2022 20:44:30 : Move (4 , 4) to (2 , 6)2/2/2022 20:48:19 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase1.txt
-2/2/2022 20:48:24 : Move from Crane (8, 0) to (0 , 2)2/2/2022 20:48:28 : Move (0 , 2) to (0 , 6)2/2/2022 20:48:55 : There is something wrong with the contianers
-2/2/2022 20:51:34 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase3.txt
-2/2/2022 20:51:40 : Move from Crane (8, 0) to (1 , 0)2/2/2022 20:51:49 : Move (1 , 0) to (2 , 1)2/2/2022 20:51:50 : Move from Crane (2, 1) to (0 , 0)2/2/2022 20:52:41 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\CPP_ShippingSoftware\ShipCase1.txt
-2/2/2022 20:52:53 : Move from Crane (8, 0) to (0 , 2)2/2/2022 20:52:57 : Move (0 , 2) to (0 , 6)2/2/2022 20:54:52 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase5.txt
-2/3/2022 17:27:3 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase4.txt
-2/3/2022 17:27:12 : Move from Crane (8, 0) to (7 , 4)2/3/2022 17:27:13 : Move (7 , 4) to (1 , 3)2/3/2022 17:27:13 : Move from Crane (1, 3) to (6 , 4)2/3/2022 17:27:14 : Move (6 , 4) to (1 , 6)2/3/2022 17:27:14 : Move from Crane (1, 6) to (5 , 4)2/3/2022 17:27:15 : Move (5 , 4) to (2 , 3)2/3/2022 17:27:15 : Move from Crane (2, 3) to (4 , 4)2/3/2022 17:27:16 : Move (4 , 4) to (2 , 6)2/3/2022 17:27:24 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase1.txt
-2/3/2022 17:27:28 : Move from Crane (8, 0) to (0 , 2)2/3/2022 17:27:29 : Move (0 , 2) to (0 , 6)2/4/2022 14:39:4 : hehrehrje
-2/4/2022 18:18:43 : hi
-2/4/2022 18:18:52 : hi
-2/4/2022 18:18:52 : hi
-2/4/2022 18:20:3 : hello
-2/4/2022 18:20:39 : hello
-2/4/2022 18:44:56 : asdasd
-2/4/2022 18:44:58 : asdasd
-2/4/2022 18:44:59 : asdasd
-2/4/2022 18:44:59 : asdasd
-2/4/2022 18:45:0 : asdasd
-2/4/2022 18:45:43 : hhh
-2/4/2022 18:46:25 : sadasd
-2/4/2022 18:46:47 : asdasd
-2/4/2022 18:46:53 : asdasdasdasd
-2/4/2022 18:48:22 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase1.txt
-2/4/2022 18:48:29 : Move from Crane (8, 0) to (0 , 2)2/4/2022 18:48:30 : Move (0 , 2) to (0 , 6)2/4/2022 18:48:34 : asdasd
-2/4/2022 18:48:45 : Uploaded the manifest from file C:\Users\Chris Clemm\Desktop\CS179\ship_cases\ShipCase4.txt
-2/4/2022 18:48:55 : Move from Crane (8, 0) to (7 , 4)2/4/2022 18:48:56 : Move (7 , 4) to (1 , 3)2/4/2022 18:48:56 : Move from Crane (1, 3) to (6 , 4)2/4/2022 18:48:57 : Move (6 , 4) to (1 , 6)2/4/2022 18:48:57 : Move from Crane (1, 6) to (5 , 4)2/4/2022 18:48:58 : Move (5 , 4) to (2 , 3)2/4/2022 18:48:58 : Move from Crane (2, 3) to (4 , 4)2/4/2022 18:48:58 : Move (4 , 4) to (2 , 6)2/4/2022 18:49:1 : sadasd

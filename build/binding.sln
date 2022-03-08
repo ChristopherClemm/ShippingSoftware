@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "hello.vcxproj", "{5A747063-4A03-9DF3-D7B1-0745F4983D3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "hello.vcxproj", "{6CCFCACC-6040-DDC2-74C9-ECE81B077056}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,10 +8,10 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A747063-4A03-9DF3-D7B1-0745F4983D3A}.Debug|x64.ActiveCfg = Debug|x64
-		{5A747063-4A03-9DF3-D7B1-0745F4983D3A}.Debug|x64.Build.0 = Debug|x64
-		{5A747063-4A03-9DF3-D7B1-0745F4983D3A}.Release|x64.ActiveCfg = Release|x64
-		{5A747063-4A03-9DF3-D7B1-0745F4983D3A}.Release|x64.Build.0 = Release|x64
+		{6CCFCACC-6040-DDC2-74C9-ECE81B077056}.Debug|x64.ActiveCfg = Debug|x64
+		{6CCFCACC-6040-DDC2-74C9-ECE81B077056}.Debug|x64.Build.0 = Debug|x64
+		{6CCFCACC-6040-DDC2-74C9-ECE81B077056}.Release|x64.ActiveCfg = Release|x64
+		{6CCFCACC-6040-DDC2-74C9-ECE81B077056}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

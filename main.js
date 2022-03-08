@@ -1,10 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, Notification } = require('electron')
 const path = require('path')
 const url = require('url')
 var fs = require('fs');
 const { event } = require('jquery');
 const electron = require('electron');
 const hello2 = require('./build/Release/hello');
+const { type } = require('os');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -22,6 +23,7 @@ function createWindow () {
 }
 
 function readInput() {
+  //new Notification({ title: 'Hello', body: 'testing' }).show();
   console.log(typeof global.filepath)
   const data = fs.readFileSync(global.filepath,
       {encoding:'utf8', flag:'r'});
@@ -39,11 +41,23 @@ function readInput() {
 function updateLogFile(txtVal)
 {
   var d = new Date();
-  console.log(d.getMonth())
-  let timeString = d.getMonth() + "/"+d.getDay() + "/" + d.getFullYear() + " " + d.getHours() +":" +d.getMinutes()+":" +d.getSeconds();
+  let min = d.getMinutes();
+  let sec = d.getSeconds();
+  //d.toISOString().split('T')[0];
+  console.log(d.getMonth());
+  if(d.getMinutes() < 10)
+  {
+     min = "0"+min; 
+  }
+  if(d.getSeconds < 10)
+  {
+    console.log("less than");
+    sec = "0"+sec;
+  }
+  let timeString = d.getMonth() + "/"+d.getDay() + "/" + d.getFullYear() + " " + d.getHours() +":" +min+":" +sec;
   console.log(d);
   finalString = timeString + " : " + txtVal;
-  fs.appendFile("logfile1.txt",finalString, (err) =>{
+  fs.appendFile("logfile.txt",finalString, (err) =>{
       if(!err) {console.log("File Written");                    
               }
       else {
@@ -69,6 +83,8 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on("saveText", (event,txtVal) => {
+  
+
   updateLogFile(txtVal);
   /*var d = new Date();
   console.log(d.getMonth())
@@ -210,7 +226,8 @@ ipcMain.on("sendListOfContainers", (event,arr) => {
     }
   })
   
-   console.log("Tried to run getListofConatiners");
+   //console.log("Tried to run getListofConatiners");
+   event.returnValue = 0;
 
 
 
@@ -243,7 +260,7 @@ ipcMain.on("getListOfContainers", (event) => {
    }
    //console.log(finalLine[0]);
    event.returnValue =  finalLine;
-   console.log("Tried to run getListofConatiners");
+   //console.log("Tried to run getListofConatiners");
 
 
 
@@ -282,6 +299,26 @@ ipcMain.on("sendGrid", (event) => {
 
 })
 
+ipcMain.on("load_c++", (event) => {
+  
+  let mode = "2";
+  fs.writeFileSync("mode.txt",mode, (err) =>{
+    if(!err) {console.log("File Written\n\n\n");                    
+            }
+    else {
+        console.log("err");
+    }
+  })
+
+  const data = fs.readFileSync("mode.txt",
+    {encoding:'utf8', flag:'r'});
+  console.log(data);
+
+  console.time('c++');
+  hello2.hello();
+  console.timeEnd('c++');
+  console.log("after Balancing c++")                  
+})
 
 ipcMain.on("balance_c++", (event) => {
   
@@ -302,7 +339,10 @@ ipcMain.on("balance_c++", (event) => {
   console.time('c++');
   hello2.hello();
   console.timeEnd('c++');
-  console.log("after Balancing c++")                  
+  console.log("after Balancing c++");
+  event.sender.send("completedBalance");
+  //window.webContents.send('completedBalance', {'SAVED': 'File Saved'});
+  event.returnValue =  0;               
 })
 
 
@@ -326,10 +366,11 @@ ipcMain.on("testc++", (event) => {
               console.log("after c++")
               console.time('js');
               calc();
+              
                 
               console.timeEnd('js');                       
   })
-
+var stringPath = "";
 ipcMain.on("uploadManifest", (event) => {
     //console.log("hello im trig");
     const dialog = electron.dialog;
@@ -364,10 +405,21 @@ ipcMain.on("uploadManifest", (event) => {
                 // Updating the GLOBAL filepath variable 
                 // to user-selected file.
                 global.filepath = file.filePaths[0].toString();
+                stringPath = file.filePaths[0].toString();
+                console.log(stringPath);
                 console.log(global.filepath);
                 readInput();
                 manifestUplaodString = "Uploaded the manifest from file " + global.filepath + "\n";
                 updateLogFile(manifestUplaodString);
+                event.sender.send("shipUpload");
+                fs.writeFileSync("shipName.txt",stringPath, (err) =>{
+                  if(!err) {console.log("File Written\n\n\n");                    
+                          }
+                  else {
+                      console.log(data);
+                      console.log("err");
+                  }
+                })
                 }  
             }).catch(err => {
                 console.log(err)
@@ -377,3 +429,45 @@ ipcMain.on("uploadManifest", (event) => {
 
 })
 
+ipcMain.on("download", (event) => {
+  //let stringPath =global.filepath;
+  const data = fs.readFileSync("shipName.txt",
+    {encoding:'utf8', flag:'r'});
+    //console.log(data[0]);
+  let lines = data.split("\\");
+  console.log(lines);
+  console.log(typeof(stringPath));
+  //let myArray = stringPath.split("\\");
+  let currShipName = lines[lines.length - 1].split(".")[0];
+  //console.log(lines[lines.length - 1].split(".")[0]);
+  let outBoundString = currShipName + "OUTBOUND.txt";
+  const dataShip = fs.readFileSync("currShip.txt",
+    {encoding:'utf8', flag:'r'});
+  
+  fs.writeFileSync(outBoundString,dataShip, (err) =>{
+    if(!err) {console.log("File Written\n\n\n");                    
+            }
+    else {
+        console.log(data);
+        console.log("err");
+    }
+  })
+  let downloadString = "Download outbound file to : " + outBoundString;
+  updateLogFile(downloadString);
+  
+
+})
+
+ipcMain.on("getShipName", (event) => {
+  //let stringPath =global.filepath;
+  const data = fs.readFileSync("shipName.txt",
+    {encoding:'utf8', flag:'r'});
+    //console.log(data[0]);
+  let lines = data.split("\\");
+  console.log(lines);
+  console.log(typeof(stringPath));
+  event.returnValue = lines[lines.length - 1].split(".")[0];
+  
+  
+
+})
