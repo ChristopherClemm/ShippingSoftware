@@ -45,10 +45,12 @@ function redraw(instruction)
             for (var c=0;c<cols;++c){
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.innerHTML = "     ";
-                
-                if(i > 23)
+                if(i < 24)
                 {
-                    let diff = i - 24;
+                    cell.className = 'PINK';
+                }
+                
+                    let diff = i;
                     let text = gridUpdates[((top*12) - (12 - (diff%12)))];
                     
                     if(text == "NAN")
@@ -62,12 +64,16 @@ function redraw(instruction)
                     }
 
                     cell.innerHTML = text.substring(0,5);
+                
+                if(instruction[2] == 0 && instruction[3] == 0)
+                {
+
                 }
                 if( i == ((120 - (instruction[0] * 12))  + (instruction[1] -1)))
                 {
                     cell.className = 'FROM';
                 }
-                if( i == ((120 - (instruction[2] * 12)  + (instruction[3]-1))))
+                if( i == ((120 - (instruction[2] * 12)  + (instruction[3]-1))) && (!(instruction[2] == 0 && instruction[3] == 0)) && (!(instruction[2] == 70 && instruction[3] == 70)))
                 {
                     cell.className = 'TO';
                 }
@@ -90,26 +96,9 @@ function redraw(instruction)
 }
 
 
-
-const showGridButton = document.getElementById('ShowGrid');
+const LoadNextButton = document.getElementById('CPPLoadShipNext');
 //var list = document.getElementById('demo');
-showGridButton.addEventListener('click', function(event){
-    redraw([-1,-1,-1,-1, " "]);
-});
-
-const balanceButton = document.getElementById('CPPBalanceShip');
-//var list = document.getElementById('demo');
-balanceButton.addEventListener('click', function(event){
-    
-    ipcRenderer.send("balance_c++");
-    console.log('Balance Button Clicked');
-    console.log(test);
-    test = test +1;
-});
-
-const balanceNextButton = document.getElementById('CPPBalanceShipNext');
-//var list = document.getElementById('demo');
-balanceNextButton.addEventListener('click', function(event){
+LoadNextButton.addEventListener('click', function(event){
     console.log('Balance Next Button Clicked');
     
     let instruction = ipcRenderer.sendSync("getNextMove");
@@ -124,9 +113,9 @@ balanceNextButton.addEventListener('click', function(event){
     test = test +1;
 });
 
-const logButtonB = document.getElementById('BalancelogButton');
-logButtonB.addEventListener("click", function(event){
-    let txtBox = document.getElementById("BalancelogText");
+const logButtonL = document.getElementById('LoadlogButton');
+logButtonL.addEventListener("click", function(event){
+    let txtBox = document.getElementById("LoadlogText");
 
     let txtval = txtBox.value + "\n";
     ipcRenderer.send("saveText", txtval);
@@ -137,5 +126,19 @@ logButtonB.addEventListener("click", function(event){
 
 document.addEventListener('DOMContentLoaded', function() {
     redraw([-1,-1,-1,-1, " "]);
+    let currShipName = ipcRenderer.sendSync("getShipName");
+    document.getElementById('currShipName').innerHTML = "Working on " + currShipName;
+    //document.getElementById('currShipName').innerHTML = "Working on " + currShipName;
+    let res = ipcRenderer.send("load_c++");
     //alert("Ready!");
 }, false);
+
+ipcRenderer.on('completedLoad', function () {
+    document.getElementById('WaitForBalance').innerHTML = "Press Next To Begin";
+
+});
+
+const DownloadGridButton = document.getElementById('Download');
+DownloadGridButton.addEventListener('click', function(event){
+    ipcRenderer.send("download");
+});

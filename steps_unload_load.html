@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset = "UTF-8">
-      <title>Hello World!</title>
+      <title>loading and unloading steps</title>
       <link rel ="stylesheet" href="styles.css">
    </head>
    
@@ -12,20 +12,22 @@
          
          <button class = "button" onclick="location.href='index.html'" type="button">
             GO BACK TO HOME</button>
-        <button class = "button" id="CPPBalanceShip">Start Balance</button>
-        <button class = "button" id="CPPBalanceShipNext">Next</button>
-        <button class = "button" id="ShowGrid">Show Grid</button>
+        <!--<button class = "button" id="CPPBalanceShip">Start Balance</button>-->
+        <button class = "button" id="CPPLoadShipNext">Next</button>
+        <button class = "button" id="Download">Download outbound txt file</button>
+        <h1 id = "WaitForBalance">Wait For Balance to be completed</h1>
+        <h1 id = "currShipName"></h1>
         <h1 id = "instructText"> </h1>
       
         
         
     
-         <input type="text" id="BalancelogText" name="fname"><br>
-         <button id="BalancelogButton">ENTER LOG TEXT</button>
+         <input type="text" id="LoadlogText" name="fname"><br>
+         <button id="LoadlogButton">ENTER LOG TEXT</button>
          
 
 
-         <script src = "./balance.js" ></script>
+         <script src = "./step_unload_load.js" ></script>
       </div>
 
      

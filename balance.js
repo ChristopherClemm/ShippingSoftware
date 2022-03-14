@@ -27,6 +27,9 @@ function redraw(instruction)
         let tempDelete = document.getElementById('gridID');
         tempDelete.remove();
         document.getElementById('instructText').innerHTML = instruction[4];
+        document.getElementById('Est Time').innerHTML = "ESTIMATED TIME: " + instruction[5];
+
+
     }
     const newGrid = document.body.appendChild(grid);
 
@@ -45,10 +48,13 @@ function redraw(instruction)
             for (var c=0;c<cols;++c){
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.innerHTML = "     ";
-                
-                if(i > 23)
+                if(i < 24)
                 {
-                    let diff = i - 24;
+                    cell.className = 'PINK';
+                }
+                
+                
+                    let diff = i;
                     let text = gridUpdates[((top*12) - (12 - (diff%12)))];
                     
                     if(text == "NAN")
@@ -62,7 +68,7 @@ function redraw(instruction)
                     }
 
                     cell.innerHTML = text.substring(0,5);
-                }
+                
                 if( i == ((120 - (instruction[0] * 12))  + (instruction[1] -1)))
                 {
                     cell.className = 'FROM';
@@ -95,16 +101,7 @@ DownloadGridButton.addEventListener('click', function(event){
 });
 
 
-const balanceButton = document.getElementById('CPPBalanceShip');
-//var list = document.getElementById('demo');
-balanceButton.addEventListener('click', function(event){
-    
-    ipcRenderer.send("balance_c++");
-    console.log('Balance Button Clicked');
-    console.log(test);
-    test = test +1;
-});
-
+let empty = true;
 const balanceNextButton = document.getElementById('CPPBalanceShipNext');
 //var list = document.getElementById('demo');
 balanceNextButton.addEventListener('click', function(event){
@@ -118,9 +115,18 @@ balanceNextButton.addEventListener('click', function(event){
     }
     else{
         document.getElementById('instructText').innerHTML = "Done balancing, ready to download updated manifest";
+        document.getElementById("Est Time").innerHTML = "";
+    }
+
+    if(!empty)
+    {
+        ipcRenderer.sendSync("updateManifest", instruction);
+        empty = true;
+    }
+    else{
+        empty = false;
     }
     
-    ipcRenderer.sendSync("updateManifest", instruction);
     console.log(instruction);
     test = test +1;
 });
@@ -137,6 +143,7 @@ logButtonB.addEventListener("click", function(event){
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("HERE");
     redraw([-1,-1,-1,-1, " "]);
     let currShipName = ipcRenderer.sendSync("getShipName");
     document.getElementById('currShipName').innerHTML = "Working on " + currShipName;

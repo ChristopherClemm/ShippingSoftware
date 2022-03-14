@@ -1,5 +1,6 @@
-ol{height:200px; width:18%;}
-ol{overflow:hidden; overflow-y:scroll;}
+ul{height:400px; width:18%; text-align: center; text-align: center;}
+ul{overflow:hidden; overflow-y:scroll; text-align: center;
+    list-style: inside;}
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
     cursor:pointer;
@@ -22,6 +23,10 @@ ol{overflow:hidden; overflow-y:scroll;}
     background-color:black;
     font-weight:bold; color:red;
 }
+.grid td.PINK {
+    background-color:pink;
+    font-weight:bold; color:red;
+}
 
 .grid td.CONTAINER {
     background-color:yellow;
@@ -40,6 +45,7 @@ ol{overflow:hidden; overflow-y:scroll;}
 body{
     margin: 0px;
     padding: 0px;
+    background-color: lightgray;
     /* background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(images/banner.png); */
     /*background-image: linear-gradient(rgba(207, 207, 207, 0.7), rgba(207, 207, 207, 0.7)), url(banner2.png);
     background-position:center;

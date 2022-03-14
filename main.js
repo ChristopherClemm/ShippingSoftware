@@ -25,9 +25,13 @@ function createWindow () {
 function readInput() {
   //new Notification({ title: 'Hello', body: 'testing' }).show();
   console.log(typeof global.filepath)
-  const data = fs.readFileSync(global.filepath,
+   data = fs.readFileSync(global.filepath,
       {encoding:'utf8', flag:'r'});
   console.log(data);
+   data2 = fs.readFileSync("extendShip.txt",
+    {encoding:'utf8', flag:'r'});
+console.log(data2);
+    data = data + "\n" + data2;
   fs.writeFile("currShip.txt",data, (err) =>{
     if(!err) {console.log("File Written");                    
             }
@@ -109,25 +113,90 @@ ipcMain.on("updateManifest", (event,instruction) => {
     //console.log(data);
     let lines = updateShip.split("\n");
     console.log(instruction);
-    if(instruction[0] > 8 || instruction[2] > 8 || instruction[1] > 12 || instruction[3] > 12)
+    if(instruction[2] == 70 && instruction[3] == 70)
+      {
+        const container = fs.readFileSync("onloadTest.txt",
+        {encoding:'utf8', flag:'r'});
+        let myContainer = container.split("\n");
+        let addCont = "[09,01], " + myContainer[0];
+        lines[(((instruction[0]-1)*12) + (instruction[1]-1))] = addCont;
+        console.log("add cont = " , addCont);
+        //lines.push(addCont);
+        let finalText = lines.join("\n");
+        fs.writeFileSync("currShip.txt",finalText, (err) =>{
+          if(!err) {console.log("File Written");                    
+                  }
+          else {
+              //console.log(data);
+              console.log("err");
+          }
+        })
+
+      }
+      else if(instruction[2] == 0 && instruction[3] == 0)
+      {
+        let emptyCont = lines[(((instruction[0]-1)*12) + (instruction[1]-1))].substring(0,9) + "{00000}, UNUSED"
+
+        lines[(((instruction[0]-1)*12) + (instruction[1]-1))] = emptyCont;
+        lines[((8*12))] = "[09,01], {00000}, UNUSED";
+        console.log("empty cont = " , emptyCont);
+        let finalText = lines.join("\n");
+        fs.writeFileSync("currShip.txt",finalText, (err) =>{
+          if(!err) {console.log("File Written");                    
+                  }
+          else {
+              //console.log(data);
+              console.log("err");
+          }
+        })
+
+      }
+      else
+      {
+
+      
+        let firstContLocationString = lines.at((((instruction[0]-1)*12) + (instruction[1]-1))).substring(0,9);
+        let firstContContentsString = lines.at((((instruction[0]-1)*12) + (instruction[1]-1))).substring(9);
+
+        let secondContLocationString =  lines.at((((instruction[2]-1)*12) + (instruction[3]-1))).substring(0,9);
+        let secondContContentsString = lines.at((((instruction[2]-1)*12) + (instruction[3]-1))).substring(9)
+          console.log("firstLoc String = ", firstContLocationString);
+          console.log("first cont string = " , firstContContentsString);
+          lines[(((instruction[0]-1)*12) + (instruction[1]-1))] = firstContLocationString + secondContContentsString; 
+          lines[(((instruction[2]-1)*12) + (instruction[3]-1))] = secondContLocationString + firstContContentsString;
+          let finalText = lines.join("\n");
+          fs.writeFileSync("currShip.txt",finalText, (err) =>{
+            if(!err) {console.log("File Written");                    
+                    }
+            else {
+                //console.log(data);
+                console.log("err");
+            }
+          })
+      }
+    /*if(instruction[0] > 8 || instruction[2] > 8 || instruction[1] > 12 || instruction[3] > 12)
     {
       console.log("skipped");
     }
     else{
-      let temp = lines.at((((instruction[0]-1)*12) + (instruction[1]-1)));
-      console.log(temp)
-      lines[(((instruction[0]-1)*12) + (instruction[1]-1))] = lines.at((((instruction[2]-1)*12) + (instruction[3]-1)));
-      lines[(((instruction[2]-1)*12) + (instruction[3]-1))] = temp;
-      let finalText = lines.join("\n");
-      fs.writeFileSync("currShip.txt",finalText, (err) =>{
-        if(!err) {console.log("File Written");                    
-                }
-        else {
-            //console.log(data);
-            console.log("err");
-        }
-      })
-    }
+      
+      
+        let temp = lines.at((((instruction[0]-1)*12) + (instruction[1]-1)));
+        console.log(temp)
+        lines[(((instruction[0]-1)*12) + (instruction[1]-1))] = lines.at((((instruction[2]-1)*12) + (instruction[3]-1)));
+        lines[(((instruction[2]-1)*12) + (instruction[3]-1))] = temp;
+        let finalText = lines.join("\n");
+        fs.writeFileSync("currShip.txt",finalText, (err) =>{
+          if(!err) {console.log("File Written");                    
+                  }
+          else {
+              //console.log(data);
+              console.log("err");
+          }
+        })
+      
+      
+    }*/
     
     event.returnValue = 0;
 
@@ -155,7 +224,7 @@ ipcMain.on("updateContainersToLoad", (event,arr) => {
 
 
 
-
+let estmatedTime = -1;
 ipcMain.on("getNextMove", (event) => {
     const data = fs.readFileSync("instructions.txt",
     {encoding:'utf8', flag:'r'});
@@ -202,8 +271,38 @@ ipcMain.on("getNextMove", (event) => {
           console.log("err");
       }
     })
+    const estData = fs.readFileSync("esttime.txt",
+    {encoding:'utf8', flag:'r'});
+    let linesEst = estData.split("\n");
+    if(estmatedTime == -1)
+    {
+      time = linesEst[0];
+      estmatedTime = parseInt(linesEst[0]);
+    }
+    else{
+      time = estmatedTime - parseInt(linesEst[0]);
+      estmatedTime -= parseInt(linesEst[0]);
+    }
+    linesEst.shift();
+    let text4 = linesEst.join("\n");
+
+    fs.writeFileSync("esttime.txt",text4, (err) =>{
+      if(!err) {console.log("File Written");                    
+              }
+      else {
+          //console.log(data);
+          console.log("err");
+      }
+    })
+    if(text4 == "")
+    {
+      estmatedTime = -1;
+    }
+
+
+
     //console.log(yCoorNew);
-    let arr = [xCoorCurr,yCoorCurr, xCorrNew, yCoorNew, instructionString];
+    let arr = [xCoorCurr,yCoorCurr, xCorrNew, yCoorNew, instructionString,time];
     event.returnValue = arr;
     
 
@@ -291,7 +390,7 @@ ipcMain.on("sendGrid", (event) => {
      }
      
    }
-   //console.log(finalLine[0]);
+   console.log(finalLine);
    event.returnValue =  finalLine;
    console.log("THIS WAS ABLE TO BE RUN AFTER");
 
@@ -300,7 +399,7 @@ ipcMain.on("sendGrid", (event) => {
 })
 
 ipcMain.on("load_c++", (event) => {
-  
+  console.log("BUTTON PRESSED");
   let mode = "2";
   fs.writeFileSync("mode.txt",mode, (err) =>{
     if(!err) {console.log("File Written\n\n\n");                    
@@ -317,7 +416,20 @@ ipcMain.on("load_c++", (event) => {
   console.time('c++');
   hello2.hello();
   console.timeEnd('c++');
-  console.log("after Balancing c++")                  
+  console.log("after Balancing c++");
+  let writeEmpty = "";
+  /*fs.writeFileSync("onloadTest.txt",writeEmpty, (err) =>{
+    if(!err) {console.log("File Written\n\n\n");                    
+            }
+    else {
+        console.log(data);
+        console.log("err");
+    }
+  })
+  */
+  event.sender.send("completedLoad");
+  event.returnValue =  0;   
+
 })
 
 ipcMain.on("balance_c++", (event) => {
@@ -443,12 +555,15 @@ ipcMain.on("download", (event) => {
   let outBoundString = currShipName + "OUTBOUND.txt";
   const dataShip = fs.readFileSync("currShip.txt",
     {encoding:'utf8', flag:'r'});
-  
-  fs.writeFileSync(outBoundString,dataShip, (err) =>{
+  let getRealShip = dataShip.split("\n");
+  getRealShip = getRealShip.slice(0,96);
+  console.log(getRealShip);
+  let finalShipMani = getRealShip.join("\n");
+  fs.writeFileSync(outBoundString,finalShipMani, (err) =>{
     if(!err) {console.log("File Written\n\n\n");                    
             }
     else {
-        console.log(data);
+        //console.log(data);
         console.log("err");
     }
   })
