@@ -27,6 +27,7 @@ function redraw(instruction)
         let tempDelete = document.getElementById('gridID');
         tempDelete.remove();
         document.getElementById('instructText').innerHTML = instruction[4];
+        document.getElementById('Est Time').innerHTML = "ESTIMATED TIME: " + instruction[5];
     }
     const newGrid = document.body.appendChild(grid);
 
@@ -95,7 +96,7 @@ function redraw(instruction)
 
 }
 
-
+let empty = true;
 const LoadNextButton = document.getElementById('CPPLoadShipNext');
 //var list = document.getElementById('demo');
 LoadNextButton.addEventListener('click', function(event){
@@ -107,8 +108,25 @@ LoadNextButton.addEventListener('click', function(event){
     {
         ipcRenderer.send("saveText",instruction[4]);
     }
-    
-    ipcRenderer.sendSync("updateManifest", instruction);
+    else{
+        document.getElementById('instructText').innerHTML = "Done balancing, ready to download updated manifest";
+        document.getElementById("Est Time").innerHTML = "";
+    }
+    console.log("INSTRUCT = " , instruction[4].substring(0,4));
+    if(!empty || instruction[4].substring(0,4) == "PICK")
+    {
+        empty = true;
+        ipcRenderer.sendSync("updateManifest", instruction);
+        if(instruction[4].substring(0,4) == "PICK")
+        {
+            empty = false;
+        }
+        
+    }
+    else{
+        empty = false;
+    }
+    //ipcRenderer.sendSync("updateManifest", instruction);
     console.log(instruction);
     test = test +1;
 });
