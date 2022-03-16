@@ -58,17 +58,22 @@ function updateLogFile(txtVal)
     console.log("less than");
     sec = "0"+sec;
   }
-  let timeString = d.getMonth() + "/"+d.getDay() + "/" + d.getFullYear() + " " + d.getHours() +":" +min+":" +sec;
-  console.log(d);
-  finalString = timeString + " : " + txtVal;
-  fs.appendFile("logfile.txt",finalString, (err) =>{
-      if(!err) {console.log("File Written");                    
-              }
-      else {
-          console.log(txtVal);
-          console.log("err");
-      }
-  })
+  if(txtVal.length < 256)
+  {
+    console.log("lenght = " , txtVal.length);
+    let timeString = d.getMonth() + "/"+d.getDay() + "/" + d.getFullYear() + " " + d.getHours() +":" +min+":" +sec;
+    console.log(d);
+    finalString = timeString + " : " + txtVal;
+    fs.appendFile("logfile.txt",finalString, (err) =>{
+        if(!err) {console.log("File Written");                    
+                }
+        else {
+            console.log(txtVal);
+            console.log("err");
+        }
+    })
+  }
+  
 }
 app.whenReady().then(() => {
   createWindow()
@@ -418,7 +423,7 @@ ipcMain.on("load_c++", (event) => {
   console.timeEnd('c++');
   console.log("after Balancing c++");
   let writeEmpty = "";
-  /*fs.writeFileSync("onloadTest.txt",writeEmpty, (err) =>{
+  fs.writeFileSync("onloadTest.txt",writeEmpty, (err) =>{
     if(!err) {console.log("File Written\n\n\n");                    
             }
     else {
@@ -426,7 +431,7 @@ ipcMain.on("load_c++", (event) => {
         console.log("err");
     }
   })
-  */
+  
   event.sender.send("completedLoad");
   event.returnValue =  0;   
 

@@ -7,24 +7,35 @@ let submitContainerButton = document.getElementById("submitContainerButton");
 submitContainerButton.addEventListener("click", () => {
     //NEED TO ADD MORE ERROR CHECKING
         let txtBox = document.getElementById("weightText");
+    
         let txtBox1 = document.getElementById("DescriptionText");
-        console.log(txtBox.value.length);
+        console.log("loging the value = ", txtBox.value.length);
         let weightText = txtBox.value;
-        if(weightText.length < 5)
+        let parsedNumber = parseInt(weightText);
+        console.log("parsed number = ", parsedNumber);
+        console.log(txtBox1.length)
+        if(parsedNumber!= 'NaN' && parsedNumber > 0 && txtBox1.value.length < 256 && weightText.length < 6)
         {
-            let tempText = "";
-            for( let i = weightText.length; i < 5; i++)
+            if(weightText.length < 5)
             {
-                tempText += "0"
+                let tempText = "";
+                for( let i = weightText.length; i < 5; i++)
+                {
+                    tempText += "0"
+                }
+                weightText = tempText + weightText
             }
-            weightText = tempText + weightText
-        }
-        console.log(weightText);
+            console.log(weightText);
+            
+            let txtval = "{" + weightText + "}, "+ txtBox1.value + "\n";
+            containersToAdd.push(txtval);
+            console.log(txtval);
+            
+            ipcRenderer.send("updateContainersToLoad", txtval);
+        } 
         
-        let txtval = "{" + weightText + "}, "+ txtBox1.value + "\n";
-        containersToAdd.push(txtval);
-        console.log(txtval);
-        ipcRenderer.send("updateContainersToLoad", txtval);
+
+        
     })
 
 
